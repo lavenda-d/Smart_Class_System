@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    table th {
+      background-color: #f2f2f2;
+    }
+    .attendance-circle {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      border-radius: 50%;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+    }
+    .low-attendance {
+      background-color: #f44336;
+    }
+    .medium-attendance {
+      background-color: #FFC107;
+    }
+    .high-attendance {
+      background-color: #4CAF50;
+    }
+    .remove-btn {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border-radius: 50%;
+      background-color: #f44336;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .remove-btn:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Student Attendance List</h1>
+  </header>
+
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Attendance (%)</th>
+          <th>Attendance Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="attendance-list">
+        <tr>
+          <td>John Doe</td>
+          <td>85%</td>
+          <td><span class="attendance-circle high-attendance">85%</span></td>
+          <td><span class="remove-btn" onclick="removeStudent('John Doe')">-</span></td>
+        </tr>
+        <tr>
+          <td>Jane Smith</td>
+          <td>60%</td>
+          <td><span class="attendance-circle medium-attendance">60%</span></td>
+          <td><span class="remove-btn" onclick="removeStudent('Jane Smith')">-</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function removeStudent(studentName) {
+      if (confirm("Are you sure you want to remove ${studentName}?")) {
+        alert("${studentName}removed successfully.");
+        // Implement actual removal logic here
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <script>
+        // Connect to the WebSocket server
+        const socket = new WebSocket("ws://localhost:8765");
+
+        socket.onmessage = (event) => {
+            const fingerprintField = document.getElementById("fingerprint");
+            fingerprintField.value = event.data; // Update the fingerprint field with received data
+        };
+
+        socket.onopen = () => {
+            console.log("WebSocket connection established");
+        };
+
+        socket.onclose = () => {
+            console.log("WebSocket connection closed");
+        };
+    </script>
+</head>
+<body>
+    <h1>Register a New Student</h1>
+    <form action="upload_fingerprint.php" method="post">
+        <label for="name">Student Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="registration_number">Registration Number:</label><br>
+        <input type="text" id="registration_number" name="registration_number" required><br><br>
+
+        <label for="fingerprint">Fingerprint Template:</label><br>
+        <textarea id="fingerprint" name="fingerprint" readonly required></textarea><br><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

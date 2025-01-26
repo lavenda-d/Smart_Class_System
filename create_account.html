@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create New Account</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    h2 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    label {
+      font-weight: bold;
+      color: #555;
+    }
+    input, select {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      text-align: center;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .error {
+      color: #f44336;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Create a New Account</h1>
+  </header>
+
+  <div class="container">
+    <h2>New Account Details</h2>
+    <form action="admin.php" method="POST" id="create-account-form" enctype="multipart/form-data">
+      <div>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter full name" required>
+      </div>
+      <div>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter email address" required>
+      </div>
+      <div>
+        <label for="telephone">Telephone Number</label>
+        <input type="tel" id="telephone" name="telephone" placeholder="Enter telephone number" required>
+      </div>
+      <div>
+        <label for="fingerprint">Fingerprint Template</label>
+        <input type="file" id="fingerprint" name="fingerprint" accept=".txt,.json,.bin" required>
+      </div>
+      <div>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter username" required>
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter password" required>
+      </div>
+      <div class="error" id="error-message"></div>
+      <button type="submit">Create Account</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('create-account-form');
+    const errorMessage = document.getElementById('error-message');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Gather form data
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const telephone = document.getElementById('telephone').value.trim();
+      const fingerprint = document.getElementById('fingerprint').files[0];
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      // Basic validation
+      if (!name || !email || !telephone || !fingerprint || !username || !password) {
+        errorMessage.textContent = "Please fill out all fields.";
+        return;
+      }
+
+      // Perform backend interaction (e.g., API request)
+      // For demonstration, we display a success message
+      alert(`Account successfully created for ${name}.`);
+      form.reset(); // Clear the form
+    });
+  </script>
+</body>
+</html>

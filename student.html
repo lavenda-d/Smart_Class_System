@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="student.css"> <!-- Link to your CSS -->
+</head>
+<body>
+
+    <header>
+        <div class="user-info">
+            <h1>Welcome, [Student Name]</h1>
+            <div class="attendance-icon">
+                <span id="attendancePercentage">75%</span> <!-- Example attendance percentage -->
+            </div>
+        </div>
+        <div class="clock" id="clock">00:00:00</div>
+        <button id="logoutButton">Log Out</button> <!-- Log Out Button -->
+    </header>
+
+    <section class="class-signin">
+        <h2>Sign Into Class</h2>
+        <form id="classSignInForm">
+            <label for="classCode">Class Code:</label>
+            <input type="text" id="classCode" name="classCode" required>
+            <button type="submit">Sign In</button>
+        </form>
+        <p id="signinMessage" class="hidden"></p> <!-- Feedback Message -->
+    </section>
+
+    <section class="schedule">
+        <h2>Class Schedule</h2>
+        <a href="class_schedule.html"><button id="viewSchedule">View Schedule</button></a>
+    </section>
+
+    <section class="exams">
+        <h2>Exam Dates</h2>
+        <a href="exam_dates.html"><button id="viewExamDates">View Exam Dates</button></a>
+    </section>
+
+    <section class="cats">
+        <h2>Continuous Assessment Tests (CAT)</h2>
+        <a href="cat_dates.html"><button id="viewCatDates">View CAT Dates</button></a>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Project Name. All rights reserved.</p>
+    </footer>
+
+    <script src="student.js"></script> <!-- Link to your JavaScript -->
+    
+</body>
+</html>
