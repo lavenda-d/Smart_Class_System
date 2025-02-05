@@ -78,6 +78,40 @@
       border: 1px solid #ddd;
       border-radius: 4px;
     }
+    
+.hamburger {
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 15px;
+}
+.line {
+  display: block;
+  width: 30px;
+  height: 3px;
+  background-color: white;
+  margin: 4px 0;
+}
+.dropdown {
+  display: none;
+  position: absolute;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  right: 20px;
+  top: 60px; /* Adjust based on your header height */
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+}
+.dropdown a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 5px 0;
+}
+.dropdown a:hover {
+  text-decoration: underline;
+}
+
   </style>
 </head>
 <body>
@@ -85,6 +119,18 @@
     <h1>Welcome, Admin <span id="admin-name"></span></h1>
     <span id="date"></span><br>
     <button id="logoutButton">Log Out</button>
+    <div class="hamburger" onclick="toggleDropdown()">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="dropdown" id="accountDropdown">
+      <h2>Manage Account</h2>
+      <a href="change_password.html">Change Password</a>
+      <a href="update_profile.html">Update Profile</a>
+      <a href="view_reports.html">View Reports</a>
+      <a href="settings.html">Settings</a>
+    </div>
   </header>
 
   <div class="container">
@@ -352,6 +398,25 @@
     document.getElementById('logoutButton').addEventListener('click', function() {
         window.location.href = 'home.html';
     });
+
+    // Toggle Dropdown for Account Management
+function toggleDropdown() {
+  const dropdown = document.getElementById('accountDropdown');
+  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+}
+
+// Close dropdown if clicked outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.hamburger')) {
+    const dropdowns = document.getElementsByClassName("dropdown");
+    for (let i = 0; i < dropdowns.length; i++) {
+      const openDropdown = dropdowns[i];
+      if (openDropdown.style.display === 'block') {
+        openDropdown.style.display = 'none';
+      }
+    }
+  }
+};
   </script>
 </body>
 </html>
