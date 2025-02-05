@@ -79,3 +79,22 @@ document.getElementById('classSignInForm').addEventListener('submit', function(e
     messageElement.classList.remove('hidden');
 });
   });
+
+// Toggle Dropdown for Account Management
+function toggleDropdown() {
+    const dropdown = document.getElementById('accountDropdown');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+  }
+  
+  // Close dropdown if clicked outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.hamburger')) {
+      const dropdowns = document.getElementsByClassName("dropdown");
+      for (let i = 0; i < dropdowns.length; i++) {
+        const openDropdown = dropdowns[i];
+        if (openDropdown.style.display === 'block') {
+          openDropdown.style.display = 'none';
+        }
+      }
+    }
+  };
