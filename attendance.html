@@ -105,6 +105,20 @@
       </tbody>
     </table>
   </div>
+  <!--Improved version-->
+  <h2>Class Attendance</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Registration Number</th>
+                <th>Telephone Number</th>
+            </tr>
+        </thead>
+        <tbody id="attendanceTable">
+            <!-- Data will be loaded here -->
+        </tbody>
+    </table>
 
   <script>
     function removeStudent(studentName) {
@@ -113,6 +127,23 @@
         // Implement actual removal logic here
       }
     }
+  //improved version
+    fetch('fetch_attendance.php')
+    .then(response => response.json())
+    .then(data => {
+        let tableBody = document.getElementById("attendanceTable");
+        tableBody.innerHTML = ""; 
+        
+        data.forEach(student => {
+            let row = `<tr>
+                <td>${student.name}</td>
+                <td>${student.registration_number}</td>
+                <td>${student.telephone}</td>
+            </tr>`;
+            tableBody.innerHTML += row;
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
   </script>
 </body>
 </html>
