@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        .setting-option {
+            margin-bottom: 15px;
+        }
+        .dark-mode {
+            background: #333;
+            color: #fff;
+        }
+        button {
+            padding: 8px 15px;
+            border: none;
+            background: blue;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: darkblue;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Settings</h2>
+    
+    <div class="setting-option">
+        <label for="theme">Theme:</label>
+        <select id="theme">
+            <option value="light">Light Mode</option>
+            <option value="dark">Dark Mode</option>
+        </select>
+    </div>
+
+    <div class="setting-option">
+        <label for="notifications">Enable Notifications:</label>
+        <input type="checkbox" id="notifications" checked>
+    </div>
+
+    <div class="setting-option">
+        <label for="username">Change Username:</label>
+        <input type="text" id="username" placeholder="Enter new username">
+    </div>
+
+    <button onclick="saveSettings()">Save Settings</button>
+</div>
+
+<script>
+    // Load saved settings
+    document.addEventListener("DOMContentLoaded", function() {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        document.getElementById("theme").value = savedTheme;
+        document.body.classList.toggle("dark-mode", savedTheme === "dark");
+
+        const savedNotifications = localStorage.getItem("notifications") === "true";
+        document.getElementById("notifications").checked = savedNotifications;
+
+        const savedUsername = localStorage.getItem("username") || "";
+        document.getElementById("username").value = savedUsername;
+    });
+
+    function saveSettings() {
+        const theme = document.getElementById("theme").value;
+        const notifications = document.getElementById("notifications").checked;
+        const username = document.getElementById("username").value;
+
+        // Save to local storage
+        localStorage.setItem("theme", theme);
+        localStorage.setItem("notifications", notifications);
+        localStorage.setItem("username", username);
+
+        // Apply theme instantly
+        document.body.classList.toggle("dark-mode", theme === "dark");
+
+        alert("Settings saved successfully!");
+    }
+</script>
+
+</body>
+</html>

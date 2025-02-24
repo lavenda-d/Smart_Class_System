@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: #f9f9f9;
+            text-align: center;
+        }
+        .dark-mode {
+            background: #333;
+            color: #fff;
+        }
+        .setting-option {
+            margin-bottom: 15px;
+        }
+        select, button {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        button {
+            background: blue;
+            color: white;
+            border: none;
+            padding: 10px;
+        }
+        button:hover {
+            background: darkblue;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 id="settings-title">Settings</h2>
+    
+    <div class="setting-option">
+        <label for="theme" id="theme-label">Theme:</label>
+        <select id="theme">
+            <option value="light">Light Mode</option>
+            <option value="dark">Dark Mode</option>
+        </select>
+    </div>
+
+    <div class="setting-option">
+        <label for="language" id="language-label">Language:</label>
+        <select id="language">
+            <option value="en">English</option>
+            <option value="sw">Swahili</option>
+        </select>
+    </div>
+
+    <button onclick="saveSettings()" id="save-button">Save Settings</button>
+</div>
+
+<script>
+    // Language translations
+    const translations = {
+        en: {
+            "settings-title": "Settings",
+            "theme-label": "Theme:",
+            "language-label": "Language:",
+            "save-button": "Save Settings"
+        },
+        sw: {
+            "settings-title": "Mipangilio",
+            "theme-label": "Mandhari:",
+            "language-label": "Lugha:",
+            "save-button": "Hifadhi Mipangilio"
+        }
+    };
+
+    // Load saved settings
+    document.addEventListener("DOMContentLoaded", function() {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        const savedLanguage = localStorage.getItem("language") || "en";
+
+        document.getElementById("theme").value = savedTheme;
+        document.body.classList.toggle("dark-mode", savedTheme === "dark");
+
+        document.getElementById("language").value = savedLanguage;
+        changeLanguage(savedLanguage);
+    });
+
+    function saveSettings() {
+        const theme = document.getElementById("theme").value;
+        const language = document.getElementById("language").value;
+
+        // Save to local storage
+        localStorage.setItem("theme", theme);
+        localStorage.setItem("language", language);
+
+        // Apply theme instantly
+        document.body.classList.toggle("dark-mode", theme === "dark");
+
+        // Change language instantly
+        changeLanguage(language);
+
+        alert(language === "en" ? "Settings saved successfully!" : "Mipangilio imehifadhiwa kwa mafanikio!");
+    }
+
+    function changeLanguage(lang) {
+        document.getElementById("settings-title").textContent = translations[lang]["settings-title"];
+        document.getElementById("theme-label").textContent = translations[lang]["theme-label"];
+        document.getElementById("language-label").textContent = translations[lang]["language-label"];
+        document.getElementById("save-button").textContent = translations[lang]["save-button"];
+    }
+</script>
+
+</body>
+</html>
