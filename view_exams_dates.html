@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Dates</title>
+    <link rel="stylesheet" href="student.css"> <!-- Link to your CSS -->
+</head>
+<body>
+    <header>
+        <h1>Exam Dates</h1>
+    </header>
+    <section id="examDates">
+        <table>
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Venue</th>
+                </tr>
+            </thead>
+            <tbody id="examDatesTableBody">
+                <!-- Exam dates will be dynamically populated here -->
+            </tbody>
+        </table>
+    </section>
+    <footer>
+        <p>&copy; 2023 Project Name. All rights reserved.</p>
+    </footer>
+
+    <script >
+        // schedule.js
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('fetch_exam_dates.php')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('scheduleTableBody');
+            data.forEach(classInfo => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${classInfo.day}</td>
+                    <td>${classInfo.time}</td>
+                    <td>${classInfo.venue}</td>`;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error fetching schedule:', error));
+});
+    </script> <!-- Link to your JavaScript -->
+</body>
+</html>
