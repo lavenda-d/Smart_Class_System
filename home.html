@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Landing Page</title>
-    <link rel="stylesheet" href="home.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="home.css">
 </head>
 <body>
 
     <header>
-        <h1>Welcome to Our Project</h1>
+        <h1>CIPHERS</h1>
         <nav>
             <ul>
                 <li><a href="#project">Project Overview</a></li>
-                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#creators">Creators</a></li>
                 <li><a href="#login">Login</a></li>
             </ul>
         </nav>
@@ -21,32 +21,54 @@
             <span class="line"></span>
             <span class="line"></span>
             <span class="line"></span>
-          </div>
-          <div class="dropdown" id="accountDropdown">
+        </div>
+        <div class="dropdown" id="accountDropdown">
             <h2>Settings</h2>
             <a href="home_settings.html">Settings</a>
-          </div>
+        </div>
     </header>
 
     <section id="project">
         <h2>Project Overview</h2>
-        <p>Here you can include a brief description of your project, its objectives, features, and benefits. You might also want to include some images or videos to make it more engaging.</p>
-        <img src="project-image.jpg" alt="Project image" />
+        <p>
+            <strong>Smart Classroom Attendance System</strong><br>
+            An advanced biometric-based solution designed to automate student attendance using fingerprint recognition. This system eliminates manual roll-calling, ensuring accuracy, efficiency, and security in classrooms.
+        </p>
+        <h3>How It Works</h3>
+        <ul>
+            <li><strong>Fingerprint Authentication:</strong> Students scan their fingerprints using an AS608 Optical Fingerprint Sensor.</li>
+            <li><strong>Real-time Verification:</strong> Fingerprint data is transmitted to a local database for recognition.</li>
+            <li><strong>Attendance Logging:</strong> Upon successful identification, the student's name is displayed on an I2C LCD, and their attendance is recorded.</li>
+        </ul>
+        <h3>Feedback System:</h3>
+        <ul>
+            <li><strong>Success:</strong> Green LED blinks twice per second.</li>
+            <li><strong>Failure:</strong> Red LED blinks three times per second with a buzzer alert.</li>
+        </ul>
+        <h3>Key Features</h3>
+        <ul>
+            <li>✅ Fast & Secure – Accurate fingerprint matching.</li>
+            <li>✅ User-Friendly – LCD provides real-time feedback.</li>
+            <li>✅ Offline Operation – No reliance on internet connectivity.</li>
+            <li>✅ Automation & Efficiency – Eliminates errors in attendance.</li>
+        </ul>
+        <h3>Applications</h3>
+        <ul>
+            <li>✔ University & College Classrooms</li>
+            <li>✔ Corporate Training Sessions</li>
+            <li>✔ Secure Access Control</li>
+        </ul>
+        <p>
+            This innovative solution enhances the traditional attendance system, making it more reliable and intelligent.
+        </p>
     </section>
 
-    <section id="contact">
-        <h2>Contact Information</h2>
-        <p>Email: <a href="mailto:info@project.com">info@project.com</a></p>
-        <p>Phone: +123 456 7890</p>
-    </section>
-
-    <section id="founders">
-        <h2>Founders</h2>
+    <section id="creators">
+        <h2>Creators</h2>
         <p>Meet our founders:</p>
         <ul>
-            <li>Founder 1 - <a href="https://github.com/founder1" target="_blank">GitHub</a>, <a href="https://linkedin.com/in/founder1" target="_blank">LinkedIn</a></li>
-            <li>Founder 2 - <a href="https://github.com/founder2" target="_blank">GitHub</a>, <a href="https://linkedin.com/in/founder2" target="_blank">LinkedIn</a></li>
-            <li>Founder 3 - <a href="https://github.com/founder3" target="_blank">GitHub</a>, <a href="https://linkedin.com/in/founder3" target="_blank">LinkedIn</a></li>
+            <li>VICTOR MUKUNGA - <p>Email: <a href="mailto:mukungavi344@gmail.com">mukungavi344@gmail.com</a></p> <a href="https://github.com/QUASAR378" target="_blank">GitHub</a>, <a href="https://linkedin.com/in/VICTOR KAMAU" target="_blank">LinkedIn</a></li><br>
+            <li>LAVENDA SHIPICHIRA - <p>Email: <a href="mailto:lavendadoris20@gmail.com">lavendadoris20@gmail.com</a></p> <a href="https://github.com/lavenda-d" target="_blank">GitHub</a>, <a href="https://linkedin.com/in/LAVENDA SHIPICHIRA, MIEEE" target="_blank">LinkedIn</a></li>
         </ul>
     </section>
 
@@ -60,6 +82,7 @@
             <label for="userType">I am a:</label>
             <select id="userType" name="userType" required>
                 <option value="student">Student</option>
+                <option value="lecturer">Lecturer</option>
                 <option value="admin">Admin</option>
             </select>
             <button type="submit">Login</button>
@@ -70,7 +93,7 @@
         <p>&copy; 2023 Project Name. All rights reserved.</p>
     </footer>
 
-    <script src="home.js"></script> <!-- Load JavaScript code -->
+    <script src="home.js"></script>
 
 </body>
 </html>

@@ -2,83 +2,159 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f9f9f9;
 }
 
 header {
-    background: #35424a;
-    color: #ffffff;
-    padding: 10px 0;
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
     text-align: center;
+    position: relative;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+nav {
+    margin: 15px 0;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
+    display: flex;
+    justify-content: center;
 }
 
 nav ul li {
-    display: inline;
     margin: 0 15px;
 }
 
 nav ul li a {
-    color: #ffffff;
     text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
-section {
-    padding: 20px;
-    margin: 10px 0;
-    background: #ffffff;
+nav ul li a:hover {
+    color: #e0e0e0;
 }
 
-footer {
-    text-align: center;
-    padding: 10px 0;
-    background: #35424a;
-    color: #ffffff;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-form label, form input, form select, form button {
-    margin: 10px 0;
-}
-/* Hamburger Menu Styles */
 .hamburger {
+    display: none; /* Hidden by default for larger screens */
     cursor: pointer;
-    display: inline-block;
-    margin-left: 15px;
-  }
-  .line {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.hamburger .line {
     display: block;
     width: 30px;
     height: 3px;
     background-color: white;
-    margin: 4px 0;
-  }
-  .dropdown {
+    margin: 5px 0;
+}
+
+.dropdown {
     display: none;
     position: absolute;
+    top: 60px; /* Adjust based on your header height */
+    right: 20px;
+    background-color: white;
+    color: #333;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown a:hover {
+    background-color: #f0f0f0;
+}
+
+section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #4CAF50;
+    margin-bottom: 15px;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+p, ul {
+    line-height: 1.6;
+}
+
+.project-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
     background-color: #4CAF50;
     color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+input[type="text"],
+input[type="password"],
+select {
+    width: 100%;
     padding: 10px;
-    right: 20px;
-    top: 60px; /* Adjust based on your header height */
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
-  }
-  .dropdown a {
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4CAF50;
     color: white;
-    text-decoration: none;
-    display: block;
-    padding: 5px 0;
-  }
-  .dropdown a:hover {
-    text-decoration: underline;
-  }
-  
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .hamburger {
+        display: block; /* Show hamburger on smaller screens */
+    }
+
+    .dropdown {
+        right: 0;
+        display: none; /* Hidden by default */
+    }
+}
