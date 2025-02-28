@@ -1,6 +1,6 @@
 // home.js
 
-// Define your bypass key
+// Define your bypass key for the admin
 const bypassKey = "admin123";
 
 // Add event listener for form submission
@@ -28,7 +28,13 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         .then(result => {
             if (result.status === 'success') {
                 // Redirect based on user type
-                window.location.href = result.redirect;
+                if (userType === 'student') {
+                    window.location.href = 'student.html';
+                } else if (userType === 'lecturer') {
+                    window.location.href = 'lecturer.html';
+                } else if (userType === 'admin') {
+                    window.location.href = 'admin.html';
+                }
             } else {
                 alert(result.message); // Show error message
             }
@@ -46,17 +52,17 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 function toggleDropdown() {
     const dropdown = document.getElementById('accountDropdown');
     dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-  }
-  
-  // Close dropdown if clicked outside of it
-  window.onclick = function(event) {
+}
+
+// Close dropdown if clicked outside of it
+window.onclick = function(event) {
     if (!event.target.matches('.hamburger')) {
-      const dropdowns = document.getElementsByClassName("dropdown");
-      for (let i = 0; i < dropdowns.length; i++) {
-        const openDropdown = dropdowns[i];
-        if (openDropdown.style.display === 'block') {
-          openDropdown.style.display = 'none';
+        const dropdowns = document.getElementsByClassName("dropdown");
+        for (let i = 0; i < dropdowns.length; i++) {
+            const openDropdown = dropdowns[i];
+            if (openDropdown.style.display === 'block') {
+                openDropdown.style.display = 'none';
+            }
         }
-      }
     }
-  };
+};
