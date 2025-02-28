@@ -126,8 +126,6 @@
             <h2>Manage Account</h2>
             <a href="change_pass_ad.html">Change Password</a>
             <a href="ad.update_profile.html">Update Profile</a>
-            <a href="view_reports.html">View Reports</a>
-            <a href="ad.settings.html">Settings</a>
         </div>
     </header>
 
@@ -239,9 +237,17 @@
         const adminName = "Admin Name"; // Replace with dynamic data
         document.getElementById("admin-name").textContent = adminName;
 
-        // Set current date and time
-        const date = new Date();
-        document.getElementById("date").textContent = date.toDateString() + " " + date.toLocaleTimeString();
+    // Function to update the current date and time
+function updateDateTime() {
+    const date = new Date();
+    document.getElementById("date").textContent = date.toDateString() + " " + date.toLocaleTimeString();
+}
+
+// Initial call to display the current date and time immediately
+updateDateTime();
+
+// Update the date and time every second (1000 milliseconds)
+setInterval(updateDateTime, 1000);
 
         // Keep track of the number of entries for each schedule type
         const scheduleCounts = {
