@@ -5,62 +5,142 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create New Account</title>
   <style>
+    /* General Styles */
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f9f9f9;
+      background: linear-gradient(135deg, #f1f6f8, #ffffff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
     }
+
     header {
-      background-color: #4CAF50;
+      background: #2e4051;
       color: white;
       padding: 20px;
       text-align: center;
-    }
-    .container {
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      background: white;
+      width: 100%;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
     }
+
+    .container {
+      width: 500px;
+      margin: 20px;
+      padding: 30px;
+      background: white;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     h2 {
-      color: #333;
+      color: #1c3f62;
       text-align: center;
       margin-bottom: 20px;
+      font-size: 24px;
     }
+
     form {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 20px;
     }
+
     label {
-      font-weight: bold;
+      font-weight: 600;
       color: #555;
+      display: block;
+      margin-bottom: 8px;
     }
+
     input, select {
-      padding: 10px;
+      width: 95%;
+      padding: 12px;
       font-size: 16px;
       border: 1px solid #ddd;
-      border-radius: 4px;
+      border-radius: 8px;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
+
+    input:focus, select:focus {
+      border-color: #0073e6;
+      outline: none;
+      box-shadow: 0 0 8px rgba(0, 115, 230, 0.2);
+    }
+
     button {
-      background-color: #4CAF50;
+      background: #194067;
       color: white;
       border: none;
-      padding: 10px 20px;
+      padding: 12px 20px;
       font-size: 16px;
+      font-weight: 600;
       cursor: pointer;
-      border-radius: 4px;
+      border-radius: 8px;
+      text-align: center;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background: #005bb5;
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .error {
+      color: #ff4d4d;
+      font-size: 14px;
+      margin-top: 10px;
       text-align: center;
     }
-    button:hover {
-      background-color: #45a049;
+
+    .file-input {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
     }
-    .error {
-      color: #f44336;
+
+    .file-input input[type="file"] {
+      font-size: 16px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .file-input label {
+      display: block;
+      padding: 12px;
+      background: #062f58;
+      color: white;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .file-input label:hover {
+      background: #005bb5;
+    }
+
+    .file-input span {
       font-size: 14px;
+      color: #555;
+      display: block;
+      margin-top: 5px;
     }
   </style>
 </head>
@@ -84,9 +164,10 @@
         <label for="telephone">Telephone Number</label>
         <input type="tel" id="telephone" name="telephone" placeholder="Enter telephone number" required>
       </div>
-      <div>
-        <label for="fingerprint">Fingerprint Template</label>
+      <div class="file-input">
+        <label for="fingerprint">📁 Upload Fingerprint Template</label>
         <input type="file" id="fingerprint" name="fingerprint" accept=".txt,.json,.bin" required>
+        <span>Accepted formats: .txt, .json, .bin</span>
       </div>
       <div>
         <label for="username">Username</label>
@@ -118,14 +199,15 @@
 
       // Basic validation
       if (!name || !email || !telephone || !username || !fingerprint || !password) {
-        errorMessage.textContent = "Please fill out all fields.";
+        errorMessage.textContent = "❌ Please fill out all fields.";
         return;
       }
 
       // Perform backend interaction (e.g., API request)
       // For demonstration, we display a success message
-      alert(`Account successfully created for ${name}.`);
+      alert(`✅ Account successfully created for ${name}.`);
       form.reset(); // Clear the form
+      errorMessage.textContent = ""; // Clear error message
     });
   </script>
 </body>

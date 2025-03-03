@@ -4,73 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Landing Page</title>
-    <link rel="stylesheet" href="home.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="home.css">
 </head>
 <body>
+ 
+    <div class="sidebar" id="sidebar">
+        <ul class="sidebar-menu">
+            <li><a href="#project" onclick="closeSidebar()">Project Overview</a></li>
+            <li><a href="#contact" onclick="closeSidebar()">Contact Us</a></li>
+            <li><a href="#login" onclick="closeSidebar()">Login</a></li>
+            <li><a href="#home_settings" onclick="closeSidebar()">Settings</a></li>
+        </ul>
+    </div>
 
+    <div class="overlay" id="overlay"></div>
+    
     <header>
-        <h1>Welcome to Our Project</h1>
-        <nav>
-            <ul>
-                <li><a href="#project">Project Overview</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-                <li><a href="#login">Login</a></li>
-            </ul>
-        </nav>
-        <div class="hamburger" onclick="toggleDropdown()">
-            <span class="line"></span>
-            <span class="line"></span>
-            <span class="line"></span>
-          </div>
-          <div class="dropdown" id="accountDropdown">
-            <h2>Settings</h2>
-            <a href="home_settings.html">Settings</a>
-          </div>
+        <div class="container">
+            <h1>The smart Classroom Attendance system</h1>
+            <div class="hamburger" onclick="toggleSidebar()">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </div>
+        
     </header>
 
-    <section id="project">
-        <h2>Project Overview</h2>
-        <p>Here you can include a brief description of your project, its objectives, features, and benefits. You might also want to include some images or videos to make it more engaging.</p>
-        <img src="project-image.jpg" alt="Project image" />
-    </section>
+  
 
-    <section id="contact">
-        <h2>Contact Information</h2>
-        <p>Email: <a href="mailto:info@project.com">info@project.com</a></p>
-        <p>Phone: +123 456 7890</p>
-    </section>
+    <main>
+        <section id="project" class="section">
+            <div class="container">
+                <h2>Project Overview</h2>
+                <p>A brief description of your project, its objectives, features, and benefits. Include images or videos to engage your audience.</p>
+                <div class="image-container">
+                    <img src="project-image.jpg" alt="Project image" class="project-image" />
+                </div>
+            </div>
+        </section>
 
-    <section id="founders">
-        <h2>Founders</h2>
-        <p>Meet our founders:</p>
-        <ul>
-            <li>Founder 1 - <a href="https://github.com/founder1" target="_blank">GitHub</a>, <a href="https://linkedin.com/in/founder1" target="_blank">LinkedIn</a></li>
-            <li>Founder 2 - <a href="https://github.com/founder2" target="_blank">GitHub</a>, <a href="https://linkedin.com/in/founder2" target="_blank">LinkedIn</a></li>
-            <li>Founder 3 - <a href="https://github.com/founder3" target="_blank">GitHub</a>, <a href="https://linkedin.com/in/founder3" target="_blank">LinkedIn</a></li>
-        </ul>
-    </section>
+        <section id="contact" class="section">
+            <div class="container">
+                <h2>Contact Information</h2>
+                <p>For inquiries or more information, reach out to us:</p>
+                <ul class="contact-list">
+                    <li>Email: <a href="mailto:info@project.com">info@project.com</a></li>
+                    <li>Phone: +254 717052939</li>
+                </ul>
+            </div>
+        </section>
 
-    <section id="login">
-        <h2>Login</h2>
-        <form action="login.php" method="POST" id="loginForm">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <label for="userType">I am a:</label>
-            <select id="userType" name="userType" required>
-                <option value="student">Student</option>
-                <option value="admin">Admin</option>
-            </select>
-            <button type="submit">Login</button>
-        </form>
-    </section>
+        <section id="founders" class="section">
+            <div class="container">
+                <h2>Meet Our Founders</h2>
+                <p>Our team consists of passionate individuals dedicated to the project's success:</p>
+                <ul class="founders-list">
+                    <li><strong>Founder 1</strong> - <a href="https://github.com/founder1" target="_blank">GitHub</a>, <a href="https://linkedin.com/in/founder1" target="_blank">LinkedIn</a></li>
+                    <li><strong>Founder 2</strong> - <a href="https://github.com/founder2" target="_blank">GitHub</a>, <a href="https://linkedin.com/in/founder2" target="_blank">LinkedIn</a></li>
+                    <li><strong>Founder 3</strong> - <a href="https://github.com/founder3" target="_blank">GitHub</a>, <a href="https://linkedin.com/in/founder3" target="_blank">LinkedIn</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="login" class="section">
+            <div class="container">
+                <h2>Login</h2>
+                <form action="login.php" method="POST" class="form">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; 2023 Project Name. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2025 Our Project. All rights reserved.</p>
+        </div>
     </footer>
 
-    <script src="home.js"></script> <!-- Load JavaScript code -->
-
+    <script src="home.js"></script>
 </body>
 </html>

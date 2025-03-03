@@ -43,11 +43,12 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 });
 
 // Toggle Dropdown for Account Management
-function toggleDropdown() {
-    const dropdown = document.getElementById('accountDropdown');
-    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-  }
-  
+  function toggleDropdown() {
+    const dropdown = document.getElementById("accountDropdown");
+    const hamburger = document.querySelector(".hamburger");
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    hamburger.classList.toggle("active");
+}
   // Close dropdown if clicked outside of it
   window.onclick = function(event) {
     if (!event.target.matches('.hamburger')) {
@@ -60,3 +61,26 @@ function toggleDropdown() {
       }
     }
   };
+
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.querySelector(".overlay");
+    const hamburger = document.querySelector(".hamburger");
+
+    sidebar.classList.toggle("active");
+    overlay.classList.toggle("active");
+    hamburger.classList.toggle("active");
+}
+
+function closeSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.querySelector(".overlay");
+    const hamburger = document.querySelector(".hamburger");
+
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+    hamburger.classList.remove("active");
+}
+
+// Close sidebar when clicking outside
+document.querySelector(".overlay").addEventListener("click", closeSidebar);
