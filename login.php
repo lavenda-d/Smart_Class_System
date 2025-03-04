@@ -19,7 +19,10 @@ if ($userType === 'student') {
 } elseif ($userType === 'admin') {
     // Check for admin
     $sql = "SELECT * FROM admins WHERE username = '$username' AND password = '$password'";
-} else {
+} elseif ($userType === 'lecturer') {
+    // Check for lecturer
+    $sql = "SELECT * FROM lecturer WHERE username = '$username' AND password = '$password'";
+}else {
     $response['status'] = 'error';
     $response['message'] = 'Invalid user type.';
     echo json_encode($response);
@@ -33,8 +36,10 @@ if ($result->num_rows > 0) {
     $response['status'] = 'success';
     if ($userType === 'student') {
         $response['redirect'] = 'student.html';
-    } else {
+    } elseif ($userType === 'admin') {
         $response['redirect'] = 'admin.html';
+    } elseif ($userType === 'lecturer') {
+        $response['redirect'] = 'lecturer.html';
     }
 } else {
     // If login fails
