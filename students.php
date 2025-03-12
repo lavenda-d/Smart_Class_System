@@ -1,3 +1,45 @@
+<?php
+// Include the database connection configurations
+include('config.php');
+
+// Initialize variables for form data and messages
+$name = $registrationNumber = $email = $telephone = $username = $password = $fingerprint = "";
+$successMessage = $errorMessage = "";
+
+// Check if form data is being sent
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get the data from the form and sanitize it
+    $name = trim($_POST['name']);
+    $registrationNumber = trim($_POST['registration_number']);
+    $email = trim($_POST['email']);
+    $telephone = trim($_POST['telephone']);
+    $username = trim($_POST['username']);
+    $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT); // Hash the password
+    $fingerprint = trim($_POST['fingerprint']);
+
+    // Insert the student data into the database using PDO
+    $sql = "INSERT INTO students (name, registration_number, email, telephone, fingerprint_template, username, password) 
+            VALUES (:name, :registration_number, :email, :telephone, :fingerprint_template, :username, :password)";
+    $stmt = $pdo->prepare($sql);
+
+    // Bind parameters
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':registration_number', $registrationNumber);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':telephone', $telephone);
+    $stmt->bindParam(':fingerprint_template', $fingerprint);
+    $stmt->bindParam(':username', $username);
+    $stmt->bindParam(':password', $password);
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        $successMessage = "Student account successfully created for $name.";
+    } else {
+        $errorMessage = "Error: Unable to create student account. Debug: " . implode(" ", $stmt->errorInfo());
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,6 +90,9 @@
         }
 
         input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"],
         textarea {
             width: 100%;
             padding: 12px;
@@ -59,6 +104,9 @@
         }
 
         input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="password"]:focus,
         textarea:focus {
             border-color: #0073e6;
             outline: none;
@@ -106,6 +154,20 @@
         .status.disconnected {
             color: #ff4d4d;
         }
+
+        .success {
+            color: #28a745;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .error {
+            color: #f44336;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
     <script>
         // Connect to the WebSocket server
@@ -133,17 +195,39 @@
     </script>
 </head>
 <body>
-    <form action="upload_fingerprint.php" method="post">
+    <form action="" method="POST" id="student-registration-form">
         <h1>Register a New Student</h1>
         
+        <?php
+        // Display success or error messages
+        if (!empty($successMessage)) {
+            echo "<div class='success'>$successMessage</div>";
+        }
+        if (!empty($errorMessage)) {
+            echo "<div class='error'>$errorMessage</div>";
+        }
+        ?>
+
         <label for="name">Student Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter student name" required>
+        <input type="text" id="name" name="name" placeholder="Enter student name" value="<?php echo htmlspecialchars($name); ?>" required>
         
         <label for="registration_number">Registration Number:</label>
-        <input type="text" id="registration_number" name="registration_number" placeholder="Enter registration number" required>
+        <input type="text" id="registration_number" name="registration_number" placeholder="Enter registration number" value="<?php echo htmlspecialchars($registrationNumber); ?>" required>
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" placeholder="Enter email address" value="<?php echo htmlspecialchars($email); ?>" required>
+
+        <label for="telephone">Telephone Number:</label>
+        <input type="tel" id="telephone" name="telephone" placeholder="Enter telephone number" value="<?php echo htmlspecialchars($telephone); ?>" required>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Enter username" value="<?php echo htmlspecialchars($username); ?>" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter password" required>
 
         <label for="fingerprint">Fingerprint Template:</label>
-        <textarea id="fingerprint" name="fingerprint" readonly placeholder="Fingerprint data will appear here..." required></textarea>
+        <textarea id="fingerprint" name="fingerprint" readonly placeholder="Fingerprint data will appear here..." required><?php echo htmlspecialchars($fingerprint); ?></textarea>
 
         <button type="submit">Submit</button>
 

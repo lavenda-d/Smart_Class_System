@@ -1,10 +1,10 @@
 // home.js
 
-// Define your bypass key
+// Define your bypass key for the admin
 const bypassKey = "admin123";
 
 // Add event listener for form submission
-document.getElementById('loginForm').addEventListener('submit', function(event) {
+document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent default form submission
 
     const username = document.getElementById('username').value;
@@ -15,52 +15,59 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     if (userType === 'admin' && password === bypassKey) {
         // Redirect directly to admin page
         window.location.href = 'admin.html';
-    } else if (username && password) {
-        // Make an AJAX request to the login PHP API
-        fetch('login.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&userType=${encodeURIComponent(userType)}`
-        })
-        .then(response => response.json())
-        .then(result => {
+        return; // Exit the function
+    }
+
+    if (username && password) {
+        try {
+            // Make an AJAX request to the login PHP API
+            const response = await fetch('homelogin.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&userType=${encodeURIComponent(userType)}`
+            });
+
+            const result = await response.json();
+
             if (result.status === 'success') {
-                // Redirect based on user type
-                window.location.href = result.redirect;
+                // Redirect based on user type and pass the username as a query parameter
+                const redirectUrl = `${result.redirect}?username=${encodeURIComponent(username)}`;
+                window.location.href = redirectUrl;
+            
             } else {
                 alert(result.message); // Show error message
             }
-        })
-        .catch(error => {
+        } catch (error) {
             console.error('Error:', error);
             alert('There was an error with your request.');
-        });
+        }
     } else {
         alert('Please fill in all fields.');
     }
 });
 
 // Toggle Dropdown for Account Management
-  function toggleDropdown() {
+function toggleDropdown() {
     const dropdown = document.getElementById("accountDropdown");
     const hamburger = document.querySelector(".hamburger");
     dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
     hamburger.classList.toggle("active");
 }
-  // Close dropdown if clicked outside of it
-  window.onclick = function(event) {
+
+// Close dropdown if clicked outside of it
+window.onclick = function(event) {
     if (!event.target.matches('.hamburger')) {
-      const dropdowns = document.getElementsByClassName("dropdown");
-      for (let i = 0; i < dropdowns.length; i++) {
-        const openDropdown = dropdowns[i];
-        if (openDropdown.style.display === 'block') {
-          openDropdown.style.display = 'none';
+        const dropdowns = document.getElementsByClassName("dropdown");
+        for (let i = 0; i < dropdowns.length; i++) {
+            const openDropdown = dropdowns[i];
+            if (openDropdown.style.display === 'block') {
+                openDropdown.style.display = 'none';
+            }
         }
-      }
     }
-  };
+};
 
 function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
@@ -84,3 +91,6 @@ function closeSidebar() {
 
 // Close sidebar when clicking outside
 document.querySelector(".overlay").addEventListener("click", closeSidebar);
+
+
+

@@ -3,52 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
+    <title>Website Settings</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+       /* General Styles */
+       body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            color: #333;
             transition: background 0.3s, color 0.3s;
         }
+
         .container {
-            width: 50%;
+            width: 90%;
+            max-width: 500px;
             margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            background: #f9f9f9;
+            padding: 30px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s, box-shadow 0.3s;
+            margin-top: 150px;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #0073e6;
             text-align: center;
         }
+
+        .setting-option {
+            margin-bottom: 20px;
+        }
+
+        .setting-option label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .setting-option select,
+        .setting-option input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background: #f9f9f9;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .setting-option select:focus,
+        .setting-option input[type="text"]:focus {
+            border-color: #0073e6;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 115, 230, 0.2);
+        }
+
+        .setting-option input[type="checkbox"] {
+            margin-right: 10px;
+            accent-color: #0073e6; /* Custom checkbox color */
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #0073e6;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: #005bb5;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* Dark Mode Styles */
         .dark-mode {
-            background: #333;
+            background: #1a1a1a;
             color: #fff;
         }
-        .setting-option {
-            margin-bottom: 15px;
+
+        .dark-mode .container {
+            background: #2d2d2d;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
-        select, button {
-            padding: 8px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            cursor: pointer;
+
+        .dark-mode h2 {
+            color: #66b3ff;
         }
-        button {
-            background: blue;
-            color: white;
-            border: none;
-            padding: 10px;
+
+        .dark-mode .setting-option label {
+            color: #ccc;
         }
-        button:hover {
-            background: darkblue;
+
+        .dark-mode .setting-option select,
+        .dark-mode .setting-option input[type="text"] {
+            background: #3d3d3d;
+            border-color: #555;
+            color: #fff;
+        }
+
+        .dark-mode .setting-option select:focus,
+        .dark-mode .setting-option input[type="text"]:focus {
+            border-color: #66b3ff;
+            box-shadow: 0 0 8px rgba(102, 179, 255, 0.2);
+        }
+
+        .dark-mode button {
+            background: #66b3ff;
+            color: #1a1a1a;
+        }
+
+        .dark-mode button:hover {
+            background: #4da6ff;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2 id="settings-title">Settings</h2>
+    <h2>Settings</h2>
     
     <div class="setting-option">
-        <label for="theme" id="theme-label">Theme:</label>
+        <label for="theme">Theme:</label>
         <select id="theme">
             <option value="light">Light Mode</option>
             <option value="dark">Dark Mode</option>
@@ -56,68 +148,49 @@
     </div>
 
     <div class="setting-option">
-        <label for="language" id="language-label">Language:</label>
-        <select id="language">
-            <option value="en">English</option>
-            <option value="sw">Swahili</option>
-        </select>
+        <label for="notifications">Enable Notifications:</label>
+        <input type="checkbox" id="notifications" checked>
     </div>
 
-    <button onclick="saveSettings()" id="save-button">Save Settings</button>
+  
+    <button onclick="saveSettings()">Save Settings</button>
 </div>
 
 <script>
-    // Language translations
-    const translations = {
-        en: {
-            "settings-title": "Settings",
-            "theme-label": "Theme:",
-            "language-label": "Language:",
-            "save-button": "Save Settings"
-        },
-        sw: {
-            "settings-title": "Mipangilio",
-            "theme-label": "Mandhari:",
-            "language-label": "Lugha:",
-            "save-button": "Hifadhi Mipangilio"
-        }
-    };
+   // Load saved settings
+document.addEventListener("DOMContentLoaded", function () {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    document.getElementById("theme").value = savedTheme;
+    document.body.classList.toggle("dark-mode", savedTheme === "dark");
 
-    // Load saved settings
-    document.addEventListener("DOMContentLoaded", function() {
-        const savedTheme = localStorage.getItem("theme") || "light";
-        const savedLanguage = localStorage.getItem("language") || "en";
+    const savedNotifications = localStorage.getItem("notifications") === "true";
+    document.getElementById("notifications").checked = savedNotifications;
 
-        document.getElementById("theme").value = savedTheme;
-        document.body.classList.toggle("dark-mode", savedTheme === "dark");
+   
 
-        document.getElementById("language").value = savedLanguage;
-        changeLanguage(savedLanguage);
+    // Add event listener for theme change
+    document.getElementById("theme").addEventListener("change", function () {
+        const selectedTheme = this.value;
+        document.body.classList.toggle("dark-mode", selectedTheme === "dark");
+        localStorage.setItem("theme", selectedTheme);
     });
+});
 
-    function saveSettings() {
-        const theme = document.getElementById("theme").value;
-        const language = document.getElementById("language").value;
+function saveSettings() {
+    const theme = document.getElementById("theme").value;
+    const notifications = document.getElementById("notifications").checked;
+    
 
-        // Save to local storage
-        localStorage.setItem("theme", theme);
-        localStorage.setItem("language", language);
+    // Save to local storage
+    localStorage.setItem("theme", theme);
+    localStorage.setItem("notifications", notifications);
+    
 
-        // Apply theme instantly
-        document.body.classList.toggle("dark-mode", theme === "dark");
+    // Apply theme instantly
+    document.body.classList.toggle("dark-mode", theme === "dark");
 
-        // Change language instantly
-        changeLanguage(language);
-
-        alert(language === "en" ? "Settings saved successfully!" : "Mipangilio imehifadhiwa kwa mafanikio!");
-    }
-
-    function changeLanguage(lang) {
-        document.getElementById("settings-title").textContent = translations[lang]["settings-title"];
-        document.getElementById("theme-label").textContent = translations[lang]["theme-label"];
-        document.getElementById("language-label").textContent = translations[lang]["language-label"];
-        document.getElementById("save-button").textContent = translations[lang]["save-button"];
-    }
+    alert("Settings saved successfully!");
+}
 </script>
 
 </body>

@@ -5,7 +5,6 @@ function updateClock() {
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
     document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
-
 }
 
 // Update clock every second
@@ -18,8 +17,6 @@ document.getElementById('classSignInForm').addEventListener('submit', function(e
     const classCode = document.getElementById('classCode').value;
     alert(`Signed into class with code: ${classCode}`);
 });
-
-// student.js
 
 // Add an event listener for the logout button
 document.getElementById('logoutButton').addEventListener('click', function() {
@@ -40,22 +37,17 @@ window.onload = function() {
   
     const messageElement = document.getElementById('signinMessage');
     messageElement.textContent = onlineSigningEnabled ? '' : 'Online signing in is disabled.';
-  }
-  
-  // Continue with your sign-in logic...
-  document.getElementById('classSignInForm').addEventListener('submit', function(event) {
+}
+
+// Continue with your sign-in logic...
+document.getElementById('classSignInForm').addEventListener('submit', function(event) {
     if (localStorage.getItem('onlineSigningEnabled') !== 'true') {
-      alert("Online signing in is disabled.");
-      event.preventDefault();
-      return;
+        alert("Online signing in is disabled.");
+        event.preventDefault();
+        return;
     }
     
     // Add your original sign-in validation logic here...
-    
-// JavaScript to handle class sign-in
-document.getElementById('classSignInForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission
-
     const enteredCode = document.getElementById('classCode').value.trim();
     const storedClassCode = localStorage.getItem('classCode'); // Retrieve the stored class code
     
@@ -67,9 +59,6 @@ document.getElementById('classSignInForm').addEventListener('submit', function(e
     if (enteredCode === storedClassCode) {
         messageElement.textContent = "Successfully signed in to class!";
         messageElement.style.color = "green";
-        
-        // Optionally redirect to the class page
-        // window.location.href = 'class_page.html';
     } else {
         messageElement.textContent = "Access Denied: Invalid Class Code.";
         messageElement.style.color = "red";
@@ -78,23 +67,34 @@ document.getElementById('classSignInForm').addEventListener('submit', function(e
     // Show the message
     messageElement.classList.remove('hidden');
 });
-  });
 
 // Toggle Dropdown for Account Management
 function toggleDropdown() {
     const dropdown = document.getElementById('accountDropdown');
     dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-  }
-  
-  // Close dropdown if clicked outside of it
-  window.onclick = function(event) {
+}
+
+// Close dropdown if clicked outside of it
+window.onclick = function(event) {
     if (!event.target.matches('.hamburger')) {
-      const dropdowns = document.getElementsByClassName("dropdown");
-      for (let i = 0; i < dropdowns.length; i++) {
-        const openDropdown = dropdowns[i];
-        if (openDropdown.style.display === 'block') {
-          openDropdown.style.display = 'none';
+        const dropdowns = document.getElementsByClassName("dropdown");
+        for (let i = 0; i < dropdowns.length; i++) {
+            const openDropdown = dropdowns[i];
+            if (openDropdown.style.display === 'block') {
+                openDropdown.style.display = 'none';
+            }
         }
-      }
     }
-  };
+};
+
+// Get query parameters from URL
+const urlParams = new URLSearchParams(window.location.search);
+const username = urlParams.get('username');
+
+// Sanitize and display username if it exists
+if (username) {
+    const sanitizedUsername = username.replace(/</g, "&lt;").replace(/>/g, "&gt;"); // Basic XSS protection
+    document.getElementById('welcomeMessage').textContent = `Welcome, ${sanitizedUsername}`;
+} else {
+    document.getElementById('welcomeMessage').textContent = "Welcome, Student";
+}

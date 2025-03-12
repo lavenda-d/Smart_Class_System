@@ -1,7 +1,61 @@
-its not working well in sending the form data, so i combined with the php where it works
+<?php
+// Include the database connection configurations
+include('config.php');
 
+// Initialize variables for form data and messages
+$name = $email = $telephone = $username = $password = $fingerprintFileName = "";
+$successMessage = $errorMessage = "";
 
-<!-- <!DOCTYPE html>
+// Check if form data is being sent
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get the data from the form and sanitize it
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $telephone = trim($_POST['telephone']);
+    $username = trim($_POST['username']);
+    $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT); // Hash the password
+
+    // Handle fingerprint file upload
+    if (isset($_FILES['fingerprint_template']) && $_FILES['fingerprint_template']['error'] === UPLOAD_ERR_OK) {
+        $fingerprintFileName = basename($_FILES['fingerprint_template']['name']);
+        $targetDirectory = "uploads/"; // Ensure this directory exists and is writable
+        $targetFilePath = $targetDirectory . $fingerprintFileName;
+
+        // Create the uploads directory if it doesn't exist
+        if (!is_dir($targetDirectory)) {
+            mkdir($targetDirectory, 0755, true);
+        }
+
+        // Move the uploaded file
+        if (move_uploaded_file($_FILES['fingerprint_template']['tmp_name'], $targetFilePath)) {
+            // Insert the user data into the database using PDO
+            $sql = "INSERT INTO admins (name, email, telephone, fingerprint_template, username, password) VALUES (:name, :email, :telephone, :fingerprint_template, :username, :password)";
+            $stmt = $pdo->prepare($sql);
+
+            // Bind parameters
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':telephone', $telephone);
+            $stmt->bindParam(':fingerprint_template', $fingerprintFileName);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':password', $password);
+
+            // Execute the statement
+            if ($stmt->execute()) {
+                $successMessage = "Account successfully created for $name.";
+            } else {
+                $errorMessage = "Error: Unable to create account. Debug: " . implode(" ", $stmt->errorInfo());
+            }
+        } else {
+            $errorMessage = "Error uploading the fingerprint file.";
+        }
+    } else {
+        $errorMessage = "Fingerprint file is not uploaded or there's an error.";
+    }
+}
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -109,6 +163,13 @@ its not working well in sending the form data, so i combined with the php where 
       text-align: center;
     }
 
+    .success {
+      color: #28a745;
+      font-size: 14px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
     .file-input {
       position: relative;
       overflow: hidden;
@@ -154,18 +215,27 @@ its not working well in sending the form data, so i combined with the php where 
 
   <div class="container">
     <h2>New Account Details</h2>
-    <form action="admins.php" method="POST" id="create-account-form" enctype="multipart/form-data">
+    <?php
+    // Display success or error messages
+    if (!empty($successMessage)) {
+        echo "<div class='success'>$successMessage</div>";
+    }
+    if (!empty($errorMessage)) {
+        echo "<div class='error'>$errorMessage</div>";
+    }
+    ?>
+    <form action="" method="POST" id="create-account-form" enctype="multipart/form-data">
       <div>
         <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" placeholder="Enter full name" required>
+        <input type="text" id="name" name="name" placeholder="Enter full name" value="<?php echo htmlspecialchars($name); ?>" required>
       </div>
       <div>
         <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="Enter email address" required>
+        <input type="email" id="email" name="email" placeholder="Enter email address" value="<?php echo htmlspecialchars($email); ?>" required>
       </div>
       <div>
         <label for="telephone">Telephone Number</label>
-        <input type="tel" id="telephone" name="telephone" placeholder="Enter telephone number" required>
+        <input type="tel" id="telephone" name="telephone" placeholder="Enter telephone number" value="<?php echo htmlspecialchars($telephone); ?>" required>
       </div>
       <div class="file-input">
         <label for="fingerprint">📁 Upload Fingerprint Template</label>
@@ -174,7 +244,7 @@ its not working well in sending the form data, so i combined with the php where 
       </div>
       <div>
         <label for="username">Username</label>
-        <input type="text" id="username" name="username" placeholder="Enter username" required>
+        <input type="text" id="username" name="username" placeholder="Enter username" value="<?php echo htmlspecialchars($username); ?>" required>
       </div>
       <div>
         <label for="password">Password</label>
@@ -190,8 +260,6 @@ its not working well in sending the form data, so i combined with the php where 
     const errorMessage = document.getElementById('error-message');
 
     form.addEventListener('submit', (e) => {
-      e.preventDefault();
-
       // Gather form data
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
@@ -201,17 +269,19 @@ its not working well in sending the form data, so i combined with the php where 
       const password = document.getElementById('password').value.trim();
 
       // Basic validation
-      if (!name || !email || !telephone || !username ||!fingerprint_template || !password) {
+      if (!name || !email || !telephone || !username || !fingerprint || !password) {
+        e.preventDefault(); // Prevent form submission
         errorMessage.textContent = "❌ Please fill out all fields.";
         return;
       }
 
-      // Perform backend interaction (e.g., API request)
+       // Perform backend interaction (e.g., API request)
       // For demonstration, we display a success message
       alert(`✅ Account successfully created for ${name}.`);
       form.reset(); // Clear the form
       errorMessage.textContent = ""; // Clear error message
+      
     });
   </script>
 </body>
-</html> -->
+</html>

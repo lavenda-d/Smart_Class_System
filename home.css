@@ -7,6 +7,7 @@ body {
     color: #333;
     line-height: 1.6;
     overflow-x: hidden;
+    background-color: #f9f9f9;
 }
 
 .container {
@@ -84,7 +85,20 @@ header h1 {
     opacity: 0; /* Start hidden for animation */
     transform: translateX(-20px); /* Start off-screen */
     transition: opacity 0.3s ease, transform 0.3s ease;
+    background-color: #8994d5;
+    color: white;
+    padding: 20px;
     text-align: center;
+    position: relative;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+nav {
+    margin: 15px 0;
 }
 
 .sidebar.active .sidebar-menu li {
@@ -270,6 +284,8 @@ main {
 .contact-list, .founders-list {
     list-style: none;
     padding: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .contact-list li, .founders-list li {

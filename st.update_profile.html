@@ -5,94 +5,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Update</title>
     <style>
+        /* General Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: #f4f4f4;
+            margin: 0;
+            background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
         }
+
         .container {
             background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            width: 350px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+            width: 400px;
             text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         h2 {
             margin-bottom: 20px;
+            font-size: 24px;
+            color: #0073e6;
         }
+
         .profile-pic {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #ddd;
+            border: 3px solid #0073e6;
+            cursor: pointer;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
+
+        .profile-pic:hover {
+            transform: scale(1.05);
+            border-color: #005bb5;
+        }
+
+        .profile-pic-input {
+            display: none;
+        }
+
         .input-group {
-            margin: 15px 0;
+            margin: 20px 0;
             text-align: left;
         }
+
         label {
-            font-weight: bold;
+            font-weight: 600;
+            color: #555;
+            display: block;
+            margin-bottom: 8px;
         }
+
         input {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
+
+        input:focus {
+            border-color: #0073e6;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 115, 230, 0.2);
+        }
+
         button {
             width: 100%;
-            padding: 10px;
-            background: blue;
+            padding: 12px;
+            background: #0073e6;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
         }
+
         button:hover {
-            background: darkblue;
+            background: #005bb5;
+            transform: translateY(-2px);
         }
+
+        button:active {
+            transform: translateY(0);
+        }
+
         .error {
-            color: red;
+            color: #ff4d4d;
             font-size: 14px;
-            margin-top: 5px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
+
         .success {
-            color: green;
+            color: #00cc66;
             font-size: 14px;
-            margin-top: 5px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .emoji {
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Update Profile</h2>
+    <h2>  Update Profile</h2>
     
-    <img id="profile-pic" class="profile-pic" src="default-avatar.png" alt="Profile Picture">
+    <label for="profile-pic-input">
+        <img id="profile-pic" class="profile-pic" src="default-avatar.png" alt="Profile Picture">
+    </label>
     <input type="file" id="profile-pic-input" accept="image/*" onchange="previewImage()">
 
     <div class="input-group">
-        <label for="name">Full Name:</label>
+        <label for="name">👤 Full Name:</label>
         <input type="text" id="name">
     </div>
 
     <div class="input-group">
-        <label for="email">Email:</label>
+        <label for="email">📧 Email:</label>
         <input type="email" id="email">
     </div>
 
     <div class="input-group">
-        <label for="phone">Phone Number:</label>
+        <label for="phone">📞 Phone Number:</label>
         <input type="tel" id="phone">
     </div>
 
-    <button onclick="saveProfile()">Save Profile</button>
+    <button onclick="saveProfile()">  Save Profile</button>
     <p id="message" class="success"></p>
 </div>
 
@@ -128,7 +190,8 @@
         let profilePic = document.getElementById("profile-pic").src;
 
         if (!name || !email || !phone) {
-            document.getElementById("message").textContent = "All fields are required!";
+            document.getElementById("message").innerHTML = "❌ All fields are required!";
+            document.getElementById("message").classList.remove("success");
             document.getElementById("message").classList.add("error");
             return;
         }
@@ -139,7 +202,7 @@
         localStorage.setItem("phone", phone);
         localStorage.setItem("profilePic", profilePic);
 
-        document.getElementById("message").textContent = "Profile updated successfully!";
+        document.getElementById("message").innerHTML = "✅ Profile updated successfully!";
         document.getElementById("message").classList.remove("error");
         document.getElementById("message").classList.add("success");
     }

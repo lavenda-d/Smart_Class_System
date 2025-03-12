@@ -1,0 +1,3 @@
+Fingerprint ID: 001
+Pattern: Loop
+Confidence: 85%

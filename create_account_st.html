@@ -1,0 +1,155 @@
+its not working well in sending the form data, so i combined with the php where it works
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f4f7f8, #cceeff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #0073e6;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        form {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            max-width: 90%;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        label {
+            font-weight: 600;
+            color: #555;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #0073e6;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 115, 230, 0.2);
+        }
+
+        textarea {
+            resize: vertical; /* Allow vertical resizing */
+            min-height: 100px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: #005bb5;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .status.connected {
+            color: #00cc66;
+        }
+
+        .status.disconnected {
+            color: #ff4d4d;
+        }
+    </style>
+    <script>
+        // Connect to the WebSocket server
+        const socket = new WebSocket("ws://localhost:8765");
+
+        socket.onmessage = (event) => {
+            const fingerprintField = document.getElementById("fingerprint");
+            fingerprintField.value = event.data; // Update the fingerprint field with received data
+            document.getElementById("status").textContent = "Fingerprint data received!";
+            document.getElementById("status").classList.add("connected");
+        };
+
+        socket.onopen = () => {
+            console.log("WebSocket connection established");
+            document.getElementById("status").textContent = "Connected to WebSocket server.";
+            document.getElementById("status").classList.add("connected");
+        };
+
+        socket.onclose = () => {
+            console.log("WebSocket connection closed");
+            document.getElementById("status").textContent = "Disconnected from WebSocket server.";
+            document.getElementById("status").classList.remove("connected");
+            document.getElementById("status").classList.add("disconnected");
+        };
+    </script>
+</head>
+<body>
+    <form action="upload_fingerprint.php" method="post">
+        <h1>Register a New Student</h1>
+        
+        <label for="name">Student Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter student name" required>
+        
+        <label for="registration_number">Registration Number:</label>
+        <input type="text" id="registration_number" name="registration_number" placeholder="Enter registration number" required>
+
+        <label for="fingerprint">Fingerprint Template:</label>
+        <textarea id="fingerprint" name="fingerprint" readonly placeholder="Fingerprint data will appear here..." required></textarea>
+
+        <button type="submit">Submit</button>
+
+        <div id="status" class="status">Connecting to WebSocket server...</div>
+    </form>
+</body>
+</html> -->

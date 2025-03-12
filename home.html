@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+its not working well in sending the form data, so i combined with the php where it works
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,23 +23,45 @@
     
     <header>
         <div class="container">
-            <h1>The smart Classroom Attendance system</h1>
+            <h1>The Smart Classroom Attendance System</h1>
             <div class="hamburger" onclick="toggleSidebar()">
                 <span class="line"></span>
                 <span class="line"></span>
                 <span class="line"></span>
             </div>
         </div>
-        
     </header>
-
-  
 
     <main>
         <section id="project" class="section">
             <div class="container">
                 <h2>Project Overview</h2>
-                <p>A brief description of your project, its objectives, features, and benefits. Include images or videos to engage your audience.</p>
+                <p><strong>Smart Classroom Attendance System</strong><br>An advanced biometric-based solution designed to automate student attendance using fingerprint recognition. This system eliminates manual roll-calling, ensuring accuracy, efficiency, and security in classrooms.</p>
+                <h3>How It Works</h3>
+                <ul>
+                    <li><strong>Fingerprint Authentication:</strong> Students scan their fingerprints using an AS608 Optical Fingerprint Sensor.</li>
+                    <li><strong>Real-time Verification:</strong> Fingerprint data is transmitted to a local database for recognition.</li>
+                    <li><strong>Attendance Logging:</strong> Upon successful identification, the student's name is displayed on an I2C LCD, and their attendance is recorded.</li>
+                </ul>
+                <h3>Feedback System</h3>
+                <ul>
+                    <li><strong>Success:</strong> Green LED blinks twice per second.</li>
+                    <li><strong>Failure:</strong> Red LED blinks three times per second with a buzzer alert.</li>
+                </ul>
+                <h3>Key Features</h3>
+                <ul>
+                    <li>✅ Fast & Secure – Accurate fingerprint matching.</li>
+                    <li>✅ User-Friendly – LCD provides real-time feedback.</li>
+                    <li>✅ Offline Operation – No reliance on internet connectivity.</li>
+                    <li>✅ Automation & Efficiency – Eliminates errors in attendance.</li>
+                </ul>
+                <h3>Applications</h3>
+                <ul>
+                    <li>✔ University & College Classrooms</li>
+                    <li>✔ Corporate Training Sessions</li>
+                    <li>✔ Secure Access Control</li>
+                </ul>
+                <p>This innovative solution enhances the traditional attendance system, making it more reliable and intelligent.</p>
                 <div class="image-container">
                     <img src="project-image.jpg" alt="Project image" class="project-image" />
                 </div>
@@ -60,9 +84,8 @@
                 <h2>Meet Our Founders</h2>
                 <p>Our team consists of passionate individuals dedicated to the project's success:</p>
                 <ul class="founders-list">
-                    <li><strong>Founder 1</strong> - <a href="https://github.com/founder1" target="_blank">GitHub</a>, <a href="https://linkedin.com/in/founder1" target="_blank">LinkedIn</a></li>
-                    <li><strong>Founder 2</strong> - <a href="https://github.com/founder2" target="_blank">GitHub</a>, <a href="https://linkedin.com/in/founder2" target="_blank">LinkedIn</a></li>
-                    <li><strong>Founder 3</strong> - <a href="https://github.com/founder3" target="_blank">GitHub</a>, <a href="https://linkedin.com/in/founder3" target="_blank">LinkedIn</a></li>
+                    <li><strong>VICTOR MUKUNGA</strong> - <a href="mailto:mukungavi344@gmail.com">mukungavi344@gmail.com</a>, <a href="https://github.com/QUASAR378" target="_blank">GitHub</a>, <a href="https://linkedin.com/in/VICTOR KAMAU" target="_blank">LinkedIn</a></li>
+                    <li><strong>LAVENDA SHIPICHIRA</strong> - <a href="mailto:lavendadoris20@gmail.com">lavendadoris20@gmail.com</a>, <a href="https://github.com/lavenda-d" target="_blank">GitHub</a>, <a href="https://linkedin.com/in/LAVENDA SHIPICHIRA, MIEEE" target="_blank">LinkedIn</a></li>
                 </ul>
             </div>
         </section>
@@ -76,6 +99,13 @@
 
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" required>
+
+                    <label for="userType">I am a:</label>
+                    <select id="userType" name="userType" required>
+                        <option value="student">Student</option>
+                        <option value="lecturer">Lecturer</option>
+                        <option value="admin">Admin</option>
+                    </select>
 
                     <button type="submit">Login</button>
                 </form>
@@ -91,4 +121,4 @@
 
     <script src="home.js"></script>
 </body>
-</html>
+</html> -->
